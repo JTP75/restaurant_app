@@ -13,7 +13,7 @@ void main() => runApp(
   ),
 );
 
-/// Top level for application
+/// Top level for full application
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -21,6 +21,7 @@ class MyApp extends StatefulWidget {
   AppWidgetState createState() => AppWidgetState();
 }
 
+/// App state as notifier
 class AppState extends ChangeNotifier {
   void updateState() {
     print("changing state");
@@ -28,6 +29,7 @@ class AppState extends ChangeNotifier {
   }
 }
 
+/// App state 
 class AppWidgetState extends State<MyApp> {
   AppState state = AppState();  
 
@@ -49,6 +51,7 @@ class AppWidgetState extends State<MyApp> {
   }
 }
 
+/// Home page frontend
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -62,26 +65,13 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: topInset, bottom: bottomInset),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      print('virus installed! :D');
-                    },
-                    child: Text('CLICK 4 CASH GUARATEED!!!!!'),
-                  ),
-                ),
-              ],
-            ),
           ],
         ),
       ),
 
       bottomNavigationBar: BottomAppBar(
         height: 50,
+        color: Color.fromARGB(64, 255, 87, 34),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -103,7 +93,10 @@ class HomePage extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.settings),
               onPressed: () {
-                // Handle settings button press
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SettingsPage())
+                );
               },
             ),
           ],
@@ -114,6 +107,7 @@ class HomePage extends StatelessWidget {
   }
 }
 
+/// Search page frontend
 class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -127,26 +121,13 @@ class SearchPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: topInset, bottom: bottomInset),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      print('virus installed! :D');
-                    },
-                    child: Text('SEARCH 4 SUCKAS!!!!!'),
-                  ),
-                ),
-              ],
-            ),
           ],
         ),
       ),
 
       bottomNavigationBar: BottomAppBar(
         height: 50,
+        color: Color.fromARGB(64, 255, 87, 34),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -167,7 +148,65 @@ class SearchPage extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.settings),
               onPressed: () {
-                // Handle settings button press
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SettingsPage())
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+
+    );
+  }
+}
+
+/// Settings page frontend
+class SettingsPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+
+      appBar: AppBar(
+        title: Text("Settings"),
+      ),
+
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+          ],
+        ),
+      ),
+
+      bottomNavigationBar: BottomAppBar(
+        height: 50,
+        color: Color.fromARGB(64, 255, 87, 34),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              icon: Icon(Icons.home),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage())
+                );
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SearchPage())
+                );
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.settings),
+              onPressed: () {
               },
             ),
           ],
