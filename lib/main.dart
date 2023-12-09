@@ -67,7 +67,18 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            CriteriaBox(
+            ExpansionTile(
+              title: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Search options",
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              children: [CriteriaBox()]
             )
           ],
         ),
