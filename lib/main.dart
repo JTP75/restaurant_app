@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:device_preview/device_preview.dart';
 
+import 'page_assets/home.dart';
+
 const double topInset = 40;
 const double bottomInset = 30;
 
@@ -65,6 +67,8 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            CriteriaBox(
+            )
           ],
         ),
       ),
