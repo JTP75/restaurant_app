@@ -1,30 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_app/backend/restaurant.dart';
 
-/// Responsible for managing restaurant search box
-class SearchBox extends StatefulWidget {
+
+
+class SearchResults extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => SearchBoxState();
+  State<StatefulWidget> createState() => SearchResultsState();
 }
 
-/// Responsible for managing restaurant search box state
-class SearchBoxState extends State<SearchBox> {
+class SearchResultsState extends State<SearchResults> {
   String searchTerm = "";
-  String searchTermEnter = "";
+  List<Restaurant> results = [
+    Restaurant("Primanti Bros'"),
+    Restaurant("Ocha Thai"),
+    Restaurant("Prince of India")
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return SearchBar(
-      onChanged: (value) {
-        setState(() {
-          searchTerm = value;
-        });
+    return SizedBox(
+      height: 400.0,
+      child: Column(
+        children: [
+          SearchBar(
+            onChanged: (value) {
+              setState(() {
+                searchTerm = value;
+              });
+            },
+            hintText: "Enter search term...",
+          ),
+          Expanded(
+            child: buildSearchResults(searchTerm),
+          ),
+        ]
+      )
+    );
+  }
+
+  Widget buildSearchResults(String? query) {
+    return ListView.builder(
+      itemCount: results.length,
+      itemBuilder: (context,index) {
+        return ListTile(
+          title: Text(results[index].name),
+        );
       },
-      onSubmitted: (value) {
-        setState(() {
-          searchTermEnter = value;
-        });
-      },
-      hintText: "Enter search term...",
+      shrinkWrap: true,
     );
   }
 }

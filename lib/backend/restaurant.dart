@@ -5,8 +5,8 @@ class Restaurant {
   String url = "";
   String phoneNumber = "";
 
-  Restaurant() {
-    name = "restaurant name";
+  Restaurant(String? name) {
+    name = name!;
     url = "https://restaurant.com";
     phoneNumber = "(412) 382-5968";
   }

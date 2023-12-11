@@ -140,7 +140,7 @@ class SearchPage extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.only(left: 16.0, right: 16.0),
-              child: SearchBox(),
+              child: SearchResults(),
             )
           ],
         ),
