@@ -2,28 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:restaurant_app/backend/home_backend.dart';
 
-const List<String> priceRangeEntries = ["Any","\$","\$\$","\$\$\$"];
-const List<String> foodTypeEntries = [
-  "Any",
-  "Breakfast",
-  "Pizza",
-  "Mexican",
-  "Burgers",
-  "Chinese",
-  "Sandwiches",
-  "Seafood",
-  "Thai",
-  "Italian",
-  "Korean",
-  "Japanese",
-  "Steakhouses",
-  "Vietnamese",
-  "Vegetarian",
-  "Sushi Bars",
-  "American"
-];
-const List<int> travelDistanceEntries = [1,5,10,20,-1];
-
 HomePageBackend homePageBackend = HomePageBackend();
 
 class CriteriaBox extends Card {
@@ -36,80 +14,67 @@ class CriteriaBox extends Card {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
                 Row(
                   children: [
-                    Text(
-                      "Price Range"
-                    ),
-                    Spacer(
-                      flex: 1,
-                    ),
+                    Text("Price Range"),
+                    Spacer(flex:1,),
                     PriceDropdown()
                   ],
                 ),
               ]
             )
           ),
+
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
                 Row(
                   children: [
-                    Text(
-                      "Food Category"
-                    ),
-                    Spacer(
-                      flex: 1,
-                    ),
+                    Text("Food Category"),
+                    Spacer(flex: 1),
                     FoodDropdown()
                   ],
                 ),
               ]
             )
           ),
+
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
                 Row(
                   children: [
-                    Text(
-                      "Dietary Restrictions"
-                    ),
-                    Spacer(
-                      flex: 1,
-                    ),
-                    DietaryRestrictionsButton(
-                    )
+                    Text("Dietary Restrictions"),
+                    Spacer(flex: 1),
+                    DietaryRestrictionsButton()
                   ],
                 ),
               ]
             )
           ),
+
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
                 Row(
                   children: [
-                    Text(
-                      "Travel Distance"
-                    ),
-                    Spacer(
-                      flex: 1,
-                    ),
-                    TravelDistanceDropdown(
-                    )
+                    Text("Travel Distance"),
+                    Spacer(flex: 1),
+                    TravelDistanceDropdown()
                   ],
                 ),
               ]
             )
           ),
+
         ],
       ),
     );

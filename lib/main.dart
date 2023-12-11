@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:device_preview/device_preview.dart';
 
-import 'page_assets/home.dart';
-import 'page_assets/settings.dart';
+import 'package:restaurant_app/page_assets/home.dart';
+import 'package:restaurant_app/page_assets/search.dart';
+import 'package:restaurant_app/page_assets/settings.dart';
 
 const double topInset = 40;
 const double bottomInset = 30;
@@ -137,6 +138,10 @@ class SearchPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            Padding(
+              padding: EdgeInsets.only(left: 16.0, right: 16.0),
+              child: SearchBox(),
+            )
           ],
         ),
       ),

@@ -1,3 +1,27 @@
+
+
+const List<String> priceRangeEntries = ["Any","\$","\$\$","\$\$\$"];
+const List<String> foodTypeEntries = [
+  "Any",
+  "Breakfast",
+  "Pizza",
+  "Mexican",
+  "Burgers",
+  "Chinese",
+  "Sandwiches",
+  "Seafood",
+  "Thai",
+  "Italian",
+  "Korean",
+  "Japanese",
+  "Steakhouses",
+  "Vietnamese",
+  "Vegetarian",
+  "Sushi Bars",
+  "American"
+];
+const List<int> travelDistanceEntries = [1,5,10,20,-1];
+
 class HomePageBackend {
   String priceRange = "Any";
   String foodType = "Any";
