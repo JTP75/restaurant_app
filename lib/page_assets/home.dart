@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/page_assets/home_backend.dart';
+
+import 'package:restaurant_app/backend/home_backend.dart';
 
 const List<String> priceRangeEntries = ["Any","\$","\$\$","\$\$\$"];
 const List<String> foodTypeEntries = [
