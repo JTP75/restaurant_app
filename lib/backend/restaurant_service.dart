@@ -29,8 +29,8 @@ class RestaurantService {
         uri.replace(queryParameters: params),
         headers: _headers
       );
-      if (response.statusCode!=0) {
-        throw Exception("Exit code ${response.statusCode}");
+      if (response.statusCode!=200) {
+        throw Exception("Exit code ${response.statusCode}\n${response.body}");
       }
     } catch (e) {
       print(e);
@@ -38,7 +38,7 @@ class RestaurantService {
 
     Map<String,dynamic> responseBody = json.decode(response.body);
 
-    print(responseBody["businesses"][0]["categories"]);
+    //print(responseBody["businesses"][0]["categories"]);
 
     responseBody["businesses"].forEach((business) {
       results.add(Restaurant.fromHttpResponse(business));
