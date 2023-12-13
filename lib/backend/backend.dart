@@ -1,4 +1,4 @@
-
+import 'package:restaurant_app/backend/restaurant_service.dart';
 
 const List<String> priceRangeEntries = ["Any","\$","\$\$","\$\$\$"];
 const List<String> foodTypeEntries = [
@@ -20,7 +20,7 @@ const List<String> foodTypeEntries = [
   "Sushi Bars",
   "American"
 ];
-const List<int> travelDistanceEntries = [1,5,10,20,-1];
+const List<int> travelDistanceEntries = [1,5,10,25,-1];
 
 class HomePageBackend {
   String priceRange = "Any";
@@ -56,3 +56,19 @@ class DietaryRestrictions {
     vegan = false;
   }
 }
+
+class SettingsPageBackend {
+  bool manualLocation = false;
+  String address = "";
+
+  SettingsPageBackend() {
+    manualLocation = false;
+    address = "";
+  }
+}
+
+// Instances //
+RestaurantService restaurantService = RestaurantService().loadAccessToken();
+// LocationService locationService = LocationService();
+HomePageBackend homePage = HomePageBackend();
+SettingsPageBackend settingsPage = SettingsPageBackend();

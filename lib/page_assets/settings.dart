@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:restaurant_app/backend/settings_backend.dart';
+import 'package:restaurant_app/backend/backend.dart';
 
 SettingsPageBackend settingsPageBackend = SettingsPageBackend();
 

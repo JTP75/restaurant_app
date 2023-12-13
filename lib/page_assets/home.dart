@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:restaurant_app/backend/home_backend.dart';
-
-HomePageBackend homePageBackend = HomePageBackend();
+import 'package:restaurant_app/backend/backend.dart' as backend;
 
 class CriteriaBox extends Card {
 
@@ -89,7 +87,7 @@ class PriceDropdown extends StatefulWidget {
 }
 
 class PriceDropdownState extends State<PriceDropdown> {
-  String selectedValue = homePageBackend.priceRange;
+  String selectedValue = backend.homePage.priceRange;
 
   @override
   Widget build(BuildContext context) {
@@ -99,9 +97,9 @@ class PriceDropdownState extends State<PriceDropdown> {
         setState(() {
           selectedValue = newValue!;
         });
-        homePageBackend.priceRange = newValue!;
+        backend.homePage.priceRange = newValue!;
       },
-      items: priceRangeEntries.map<DropdownMenuItem<String>>(
+      items: backend.priceRangeEntries.map<DropdownMenuItem<String>>(
         (String value) {
           return DropdownMenuItem<String>(
             value: value,
@@ -120,7 +118,7 @@ class FoodDropdown extends StatefulWidget {
 }
 
 class FoodDropdownState extends State<FoodDropdown> {
-  String selectedValue = homePageBackend.foodType;
+  String selectedValue = backend.homePage.foodType;
 
   @override
   Widget build(BuildContext context) {
@@ -130,9 +128,9 @@ class FoodDropdownState extends State<FoodDropdown> {
         setState(() {
           selectedValue = newValue!;
         });
-        homePageBackend.foodType = newValue!;
+        backend.homePage.foodType = newValue!;
       },
-      items: foodTypeEntries.map<DropdownMenuItem<String>>(
+      items: backend.foodTypeEntries.map<DropdownMenuItem<String>>(
         (String value) {
           return DropdownMenuItem<String>(
             value: value,
@@ -167,7 +165,7 @@ class DietaryRestrictionsDialog extends StatefulWidget {
 
 class DietaryRestrictionsDialogState extends State<DietaryRestrictionsDialog> {
 
-  DietaryRestrictions dr = homePageBackend.dietaryRestrictions;
+  backend.DietaryRestrictions dr = backend.homePage.dietaryRestrictions;
 
   @override
   Widget build(BuildContext context) {
@@ -182,7 +180,7 @@ class DietaryRestrictionsDialogState extends State<DietaryRestrictionsDialog> {
               setState (() {
                 dr.glutenFree = value!;
               });
-              homePageBackend.dietaryRestrictions.glutenFree = value!;
+              backend.homePage.dietaryRestrictions.glutenFree = value!;
             }
           ),
           CheckboxListTile(
@@ -192,7 +190,7 @@ class DietaryRestrictionsDialogState extends State<DietaryRestrictionsDialog> {
               setState (() {
                 dr.halal = value!;
               });
-              homePageBackend.dietaryRestrictions.halal = value!;
+              backend.homePage.dietaryRestrictions.halal = value!;
             }
           ),
           CheckboxListTile(
@@ -202,7 +200,7 @@ class DietaryRestrictionsDialogState extends State<DietaryRestrictionsDialog> {
               setState (() {
                 dr.keto = value!;
               });
-              homePageBackend.dietaryRestrictions.keto = value!;
+              backend.homePage.dietaryRestrictions.keto = value!;
             }
           ),
           CheckboxListTile(
@@ -212,7 +210,7 @@ class DietaryRestrictionsDialogState extends State<DietaryRestrictionsDialog> {
               setState (() {
                 dr.kosher = value!;
               });
-              homePageBackend.dietaryRestrictions.kosher = value!;
+              backend.homePage.dietaryRestrictions.kosher = value!;
             }
           ),
           CheckboxListTile(
@@ -222,7 +220,7 @@ class DietaryRestrictionsDialogState extends State<DietaryRestrictionsDialog> {
               setState (() {
                 dr.pescatarian = value!;
               });
-              homePageBackend.dietaryRestrictions.pescatarian = value!;
+              backend.homePage.dietaryRestrictions.pescatarian = value!;
             }
           ),
           CheckboxListTile(
@@ -232,7 +230,7 @@ class DietaryRestrictionsDialogState extends State<DietaryRestrictionsDialog> {
               setState (() {
                 dr.vegetarian = value!;
               });
-              homePageBackend.dietaryRestrictions.vegetarian = value!;
+              backend.homePage.dietaryRestrictions.vegetarian = value!;
             }
           ),
           CheckboxListTile(
@@ -242,7 +240,7 @@ class DietaryRestrictionsDialogState extends State<DietaryRestrictionsDialog> {
               setState (() {
                 dr.vegan = value!;
               });
-              homePageBackend.dietaryRestrictions.vegan = value!;
+              backend.homePage.dietaryRestrictions.vegan = value!;
             }
           ),
         ],
@@ -273,7 +271,7 @@ String travelDistanceDisplay(int distance) {
 }
 
 class TravelDistanceDropdownState extends State<TravelDistanceDropdown> {
-  int selectedValue = homePageBackend.maxDistanceMiles;
+  int selectedValue = backend.homePage.maxDistanceMiles;
 
   @override
   Widget build(BuildContext context) {
@@ -283,9 +281,9 @@ class TravelDistanceDropdownState extends State<TravelDistanceDropdown> {
         setState(() {
           selectedValue = newValue!;
         });
-        homePageBackend.maxDistanceMiles = newValue!;
+        backend.homePage.maxDistanceMiles = newValue!;
       },
-      items: travelDistanceEntries.map<DropdownMenuItem<int>>(
+      items: backend.travelDistanceEntries.map<DropdownMenuItem<int>>(
         (int value) {
           return DropdownMenuItem<int>(
             value: value,
