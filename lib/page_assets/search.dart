@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'package:restaurant_app/page_assets/business_page.dart';
+
 import 'package:restaurant_app/backend/backend.dart' as backend;
 
 const yelpLink = "https://www.yelp.com/";
@@ -64,13 +66,14 @@ class SearchResultsState extends State<SearchResults> {
 
   Map<String,String> _buildSearchParams() {
     return {
-      "location": "Pittsburgh", // TODO
+      "location": "3303 Parkview Avenue", // TODO
       "term": searchTerm,
       "limit": "50",
       "sort_by": "best_match",
       "device_platfrom": "ios",
       "radius": "40000", // TODO
-      "categories": "food" // TODO
+      "categories": "food", // TODO
+      "open_now": "false"
     };
   }
 
@@ -99,24 +102,34 @@ class SearchResultsState extends State<SearchResults> {
           return SizedBox(height:0,width:0);
         } else if (index.isEven) {
           //print("$index / ${restaurantService.results.length}");
-          return ListTile(
-            title: Text(restaurantService.results[index].name),
-            leading: Text("0.5mi"),
-            subtitle: Text(
-              restaurantService.results[index].categories
-                .map((map) => map["title"])
-                .join(", "),
-              style: TextStyle(
-                fontSize: 10
-              )
-            ),
-            trailing: Column(
-              children: [
-                Text(restaurantService.results[index].price),
-                Spacer(flex:1),
-                Text(restaurantService.results[index].isClosed ? 'Closed':'Open')
-              ]
-            ),
+          return InkWell(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return RestaurantPage();
+                }
+              );
+            }, 
+            child: ListTile(
+              title: Text(restaurantService.results[index].name),
+              leading: Text("0.5mi"),
+              subtitle: Text(
+                restaurantService.results[index].categories
+                  .map((map) => map["title"])
+                  .join(", "),
+                style: TextStyle(
+                  fontSize: 10
+                )
+              ),
+              trailing: Column(
+                children: [
+                  Text(restaurantService.results[index].price),
+                  Spacer(flex:1),
+                  Text(restaurantService.results[index].isClosed ? 'Closed':'Open')
+                ]
+              ),
+            )
           );
         } else {
           return Divider(color: Color.fromARGB(128, 65, 65, 65));
