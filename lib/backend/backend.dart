@@ -1,4 +1,8 @@
 import 'package:restaurant_app/backend/restaurant_service.dart';
+import 'package:restaurant_app/backend/location_service.dart';
+
+RestaurantService restaurantService = RestaurantService().loadAccessToken();
+LocationService locationService = LocationService();
 
 const List<String> priceRangeEntries = ["Any","\$","\$\$","\$\$\$"];
 const List<String> foodTypeEntries = [
@@ -57,18 +61,60 @@ class DietaryRestrictions {
   }
 }
 
-class SettingsPageBackend {
-  bool manualLocation = false;
-  String address = "";
+class SearchPageBackend {
+  int _selectedIndex = -1;
+  void resetIndex() {
+    _selectedIndex = -1;
+  }
+  set selectedIndex(int index) {
+    _selectedIndex = index;
+  }
+  int get selectedIndex {
+    if (_selectedIndex<0) {
+      return 0;
+    } else {
+      return _selectedIndex;
+    }
+  }
+}
 
-  SettingsPageBackend() {
-    manualLocation = false;
-    address = "";
+class Location {
+  LocationService _locationService = locationService;
+
+  bool _manualLocation = false;
+  String _address = "";
+  double lat = 0.0;
+  double long = 0.0;
+
+  Location() {
+    _locationService = locationService;
+    _manualLocation = false;
+    _address = "";
+    lat = 0.0;
+    long = 0.0;
+  }
+
+  set manualLocation(bool mode) {
+    _manualLocation = mode;
+    if (!_manualLocation) {
+      lat = _locationService.latitude;
+      long = _locationService.longitude;
+    }
+  }
+
+  set address(String address) {
+    _address = address;
+  }
+  String get address {
+    if (_manualLocation) {
+      return _address;
+    } else {
+      return locationService.address;
+    }
   }
 }
 
 // Instances //
-RestaurantService restaurantService = RestaurantService().loadAccessToken();
-// LocationService locationService = LocationService();
 HomePageBackend homePage = HomePageBackend();
-SettingsPageBackend settingsPage = SettingsPageBackend();
+SearchPageBackend searchPage = SearchPageBackend();
+Location location = Location();

@@ -1,8 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:restaurant_app/backend/backend.dart';
-
-SettingsPageBackend settingsPageBackend = SettingsPageBackend();
 
 class ManualLocationSetting extends StatefulWidget {
   @override
@@ -11,6 +10,7 @@ class ManualLocationSetting extends StatefulWidget {
 
 class ManualLocationSettingState extends State<ManualLocationSetting> {
   bool useManualLocation = false;
+  String address = "";
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +30,14 @@ class ManualLocationSettingState extends State<ManualLocationSetting> {
               children: [
                 Text("Use Manual Location"),
                 Spacer(flex:1),
-                Switch(
+                CupertinoSwitch(
                   value: useManualLocation,
                   onChanged: (value) {
                     setState(() {
                       useManualLocation = value;
+                      location.manualLocation = value;
+                      address = location.address;
                     });
-                    settingsPageBackend.manualLocation = value;
                   },
                 ),
               ],
@@ -61,7 +62,7 @@ class ManualLocationSettingState extends State<ManualLocationSetting> {
                     textAlignVertical: TextAlignVertical.bottom,
                     onSubmitted: (value) {
                       /// TODO validate entry
-                      settingsPageBackend.address = value;
+                      location.address = value;
                     },
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -89,7 +90,7 @@ class ManualLocationSettingState extends State<ManualLocationSetting> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Version 0.0.2-alpha",
+                  "Version 0.5.0-alpha",
                   style: TextStyle(
                     fontSize: 12.0,
                     color: Color.fromARGB(255, 128, 128, 128),

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -25,14 +26,13 @@ class SearchResultsState extends State<SearchResults> {
       child: Column(
         children: [
           SizedBox(height:10),
-          SearchBar(
+          CupertinoSearchTextField(
             onSubmitted: (value) {
               setState(() {
                 searchTerm = value;
               });
               _updateSearchResults();
             },
-            hintText: "Enter search term...",
           ),
           SizedBox(height:10),
           Row(
@@ -40,7 +40,7 @@ class SearchResultsState extends State<SearchResults> {
             children: [
               InkWell(
                 onTap: () {
-                  launch(yelpLink);
+                  launchUrl(Uri.parse(yelpLink));
                 },
                 child: Image.asset(
                   "assets/yelp_logo.png",
@@ -66,13 +66,13 @@ class SearchResultsState extends State<SearchResults> {
 
   Map<String,String> _buildSearchParams() {
     return {
-      "location": "3303 Parkview Avenue", // TODO
+      "location": "Pittsburgh", // TODO
       "term": searchTerm,
       "limit": "50",
-      "sort_by": "best_match",
+      //"sort_by": "best_match",
       "device_platfrom": "ios",
       "radius": "40000", // TODO
-      "categories": "food", // TODO
+      "categories": "food",
       "open_now": "false"
     };
   }
@@ -104,6 +104,7 @@ class SearchResultsState extends State<SearchResults> {
           //print("$index / ${restaurantService.results.length}");
           return InkWell(
             onTap: () {
+              backend.searchPage.selectedIndex = index;
               showDialog(
                 context: context,
                 builder: (context) {
