@@ -4,13 +4,13 @@ import 'package:dotenv/dotenv.dart';
 
 class RestaurantService {
   static const _searchUrl = "https://api.yelp.com/v3/businesses/search";
-  late String _token = "";
-  late Map<String,String> _headers = {};
   
   int resultCount = 0;
   List<Restaurant> results = [];
 
   late http.Response response;
+  late String _token;
+  late Map<String,String> _headers;
 
   RestaurantService loadAccessToken() {
     var env = DotEnv();

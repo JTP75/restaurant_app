@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -35,8 +37,8 @@ class ManualLocationSettingState extends State<ManualLocationSetting> {
                   onChanged: (value) {
                     setState(() {
                       useManualLocation = value;
-                      location.manualLocation = value;
-                      address = location.address;
+                      settingsPage.manualLocation = value;
+                      address = settingsPage.address;
                     });
                   },
                 ),
@@ -62,7 +64,7 @@ class ManualLocationSettingState extends State<ManualLocationSetting> {
                     textAlignVertical: TextAlignVertical.bottom,
                     onSubmitted: (value) {
                       /// TODO validate entry
-                      location.address = value;
+                      settingsPage.address = value;
                     },
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -75,6 +77,26 @@ class ManualLocationSettingState extends State<ManualLocationSetting> {
                 )
               ],
             ),
+          ),
+
+          ExpansionTile(
+            title: Text("Developer Options"),
+            children: [
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: Row(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () async {
+                        await locationService.updateLocation();
+                        print(locationService.city);
+                      }, 
+                      child: Text("Test Geolocation")
+                    )
+                  ],
+                )
+              ),
+            ],
           ),
 
           Spacer(flex:1),

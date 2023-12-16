@@ -2,7 +2,7 @@ import 'package:restaurant_app/backend/restaurant_service.dart';
 import 'package:restaurant_app/backend/location_service.dart';
 
 RestaurantService restaurantService = RestaurantService().loadAccessToken();
-LocationService locationService = LocationService();
+LocationService locationService = LocationService().loadAccessToken();
 
 const List<String> priceRangeEntries = ["Any","\$","\$\$","\$\$\$"];
 const List<String> foodTypeEntries = [
@@ -78,7 +78,7 @@ class SearchPageBackend {
   }
 }
 
-class Location {
+class SettingsPageBackend {
   LocationService _locationService = locationService;
 
   bool _manualLocation = false;
@@ -86,7 +86,7 @@ class Location {
   double lat = 0.0;
   double long = 0.0;
 
-  Location() {
+  SettingsPageBackend() {
     _locationService = locationService;
     _manualLocation = false;
     _address = "";
@@ -109,7 +109,7 @@ class Location {
     if (_manualLocation) {
       return _address;
     } else {
-      return locationService.address;
+      return locationService.city;
     }
   }
 }
@@ -117,4 +117,4 @@ class Location {
 // Instances //
 HomePageBackend homePage = HomePageBackend();
 SearchPageBackend searchPage = SearchPageBackend();
-Location location = Location();
+SettingsPageBackend settingsPage = SettingsPageBackend();
