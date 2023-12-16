@@ -10,12 +10,12 @@ const double topInset = 40;
 const double bottomInset = 30;
 
 
-void main() => runApp(
-  DevicePreview(
+void main() {
+  return runApp(DevicePreview(
     enabled: true,
     builder: (context) => MyApp(), // Wrap your app
-  ),
-);
+  ));
+}
 
 /// Top level for full application
 class MyApp extends StatefulWidget {

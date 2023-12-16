@@ -97,6 +97,7 @@ class SettingsPageBackend {
   set manualLocation(bool mode) {
     _manualLocation = mode;
     if (!_manualLocation) {
+      _locationService.updateLocation();
       lat = _locationService.latitude;
       long = _locationService.longitude;
     }

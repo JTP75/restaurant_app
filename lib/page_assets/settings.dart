@@ -9,7 +9,7 @@ class ManualLocationSetting extends StatefulWidget {
 }
 
 class ManualLocationSettingState extends State<ManualLocationSetting> {
-  bool useManualLocation = false;
+  bool useManualLocation = settingsPage.manualLocation;
   String address = "";
   String city = "";
   String ipv6 = "";
