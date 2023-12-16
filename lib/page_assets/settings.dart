@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +11,8 @@ class ManualLocationSetting extends StatefulWidget {
 class ManualLocationSettingState extends State<ManualLocationSetting> {
   bool useManualLocation = false;
   String address = "";
+  String city = "";
+  String ipv6 = "";
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,28 @@ class ManualLocationSettingState extends State<ManualLocationSetting> {
 
           ExpansionTile(
             title: Text("Developer Options"),
+            onExpansionChanged: (expanded) async {
+              var ip = await locationService.ipv6;
+              setState(() {
+                if (expanded) {
+                  ipv6 = ip;
+                } else {
+                  ipv6 = "";
+                  city = "";
+                }
+              });
+            },
             children: [
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: Row(
+                  children: [
+                    Text("IPV6"),
+                    Spacer(flex:1),
+                    Text(ipv6)
+                  ],
+                )
+              ),
               Padding(
                 padding: EdgeInsets.all(10),
                 child: Row(
@@ -89,10 +110,14 @@ class ManualLocationSettingState extends State<ManualLocationSetting> {
                     ElevatedButton(
                       onPressed: () async {
                         await locationService.updateLocation();
-                        print(locationService.city);
+                        setState(() {
+                          city = locationService.city;
+                        });
                       }, 
                       child: Text("Test Geolocation")
-                    )
+                    ),
+                    Spacer(flex:1),
+                    Text(city)
                   ],
                 )
               ),

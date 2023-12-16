@@ -61,20 +61,30 @@ class SearchResultsState extends State<SearchResults> {
 
   void _updateSearchResults() async {
     await restaurantService.search(_buildSearchParams());
-    setState(() {}); // Update the state to trigger a rebuild with the new search results
+    setState(() {});
   }
 
   Map<String,String> _buildSearchParams() {
-    return {
-      "location": "Pittsburgh", // TODO
-      "term": searchTerm,
+    Map<String,String> params = {
       "limit": "50",
-      //"sort_by": "best_match",
+      "sort_by": "best_match",
       "device_platfrom": "ios",
-      "radius": "40000", // TODO
       "categories": "food",
-      "open_now": "false"
+      "open_now": "false",
+      "term": searchTerm,
+      "radius": "40000", // TODO
     };
+
+    if (backend.settingsPage.manualLocation) {
+      print("using manual ${backend.settingsPage.address}");
+      params["location"] = backend.settingsPage.address;
+    } else {
+      print("using auto ${backend.settingsPage.lat},${backend.settingsPage.long}");
+      params["latitude"] = "${backend.settingsPage.lat}";
+      params["longitude"] = "${backend.settingsPage.long}";
+    }
+
+    return params;
   }
 
   Widget _buildSearchResults(String? query) {
@@ -101,7 +111,6 @@ class SearchResultsState extends State<SearchResults> {
         if (index>=restaurantService.results.length) {
           return SizedBox(height:0,width:0);
         } else if (index.isEven) {
-          //print("$index / ${restaurantService.results.length}");
           return InkWell(
             onTap: () {
               backend.searchPage.selectedIndex = index;
@@ -114,7 +123,7 @@ class SearchResultsState extends State<SearchResults> {
             }, 
             child: ListTile(
               title: Text(restaurantService.results[index].name),
-              leading: Text("0.5mi"),
+              leading: Text("${(restaurantService.results[index].distance*0.000621371).toStringAsFixed(1)}mi"),
               subtitle: Text(
                 restaurantService.results[index].categories
                   .map((map) => map["title"])
@@ -136,7 +145,6 @@ class SearchResultsState extends State<SearchResults> {
           return Divider(color: Color.fromARGB(128, 65, 65, 65));
         }
       },
-      //shrinkWrap: true,
     );
   }
 }

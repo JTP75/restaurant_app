@@ -102,6 +102,8 @@ class SettingsPageBackend {
     }
   }
 
+  bool get manualLocation => _manualLocation;
+
   set address(String address) {
     _address = address;
   }

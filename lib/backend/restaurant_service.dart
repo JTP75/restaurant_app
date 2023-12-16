@@ -38,7 +38,7 @@ class RestaurantService {
 
     Map<String,dynamic> responseBody = json.decode(response.body);
 
-    //print(responseBody["businesses"][0]["categories"]);
+    //print(responseBody["businesses"][0]);
 
     responseBody["businesses"].forEach((business) {
       results.add(Restaurant.fromHttpResponse(business));
