@@ -14,6 +14,7 @@ const double bottomInset = 30;
 
 
 void main() {
+  locationService.updateLocation();
   return runApp(DevicePreview(
     enabled: true,
     builder: (context) => MyApp(), // Wrap your app

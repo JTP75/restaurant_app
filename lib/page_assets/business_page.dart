@@ -29,9 +29,9 @@ class RestaurantPageState extends State<RestaurantPage> {
     for (var i=0; i<categories.length; i++) {
       if (categories[i]==",") {
         prev = i;
-        if (i-offset>25) {
+        if (i-offset>20) {
           categories = "${categories.substring(0,prev+2)}\n${categories.substring(prev+2)}";
-          offset += 25;
+          offset += 20;
         }
       }
     }

@@ -28,6 +28,13 @@ const List<String> foodTypeEntries = [
   "American"
 ];
 const List<int> travelDistanceEntries = [1,5,10,25];
+const Map<String,String> priceMap = {
+  "\$": "1",
+  "\$\$": "1,2",
+  "\$\$\$": "1,2,3",
+  "\$\$\$\$": "1,2,3,4",
+  "Any": "1,2,3,4"
+};
 
 class HomePageBackend {
   String priceRange = "Any";
@@ -40,13 +47,17 @@ class HomePageBackend {
   }
 
   Map<String,String> _buildSearchParams() {
+    
+
     Map<String,String> params = {
       "limit": "50",
       "sort_by": "distance",
       "device_platfrom": "ios",
       "term": foodType,
+      "categories": "food",
       "open_now": "false",
-      "radius": "${maxDistanceMiles*1609}",
+      "price": priceMap[priceRange]!,
+      "radius": "${maxDistanceMiles*1600}",
     };
 
     if (settingsPage.manualLocation) {
