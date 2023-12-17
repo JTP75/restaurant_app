@@ -5,6 +5,9 @@ import 'package:device_preview/device_preview.dart';
 import 'package:restaurant_app/page_assets/home.dart';
 import 'package:restaurant_app/page_assets/search.dart';
 import 'package:restaurant_app/page_assets/settings.dart';
+import 'package:restaurant_app/page_assets/business_page.dart';
+
+import 'package:restaurant_app/backend/backend.dart';
 
 const double topInset = 40;
 const double bottomInset = 30;
@@ -81,6 +84,41 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               children: [CriteriaBox()]
+            ),
+            Spacer(flex:1),
+            Padding(
+              padding: EdgeInsets.all(16),
+              child: ElevatedButton(
+                onPressed: () async {
+                  var restaurant = await homePage.chooseRestaurant();
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return RestaurantPage(restaurant: restaurant);
+                    }
+                  );
+                },
+                child: SizedBox(
+                  height: 100,
+                  width: 300,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Get a Random Restaurant",
+                            style: TextStyle(
+                              fontSize: 25
+                            )
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ),
+              )
             )
           ],
         ),
@@ -94,9 +132,7 @@ class HomePage extends StatelessWidget {
           children: [
             IconButton(
               icon: Icon(Icons.home),
-              onPressed: () {
-                // Handle home button press
-              },
+              onPressed: () {},
             ),
             IconButton(
               icon: Icon(Icons.search),
@@ -163,8 +199,7 @@ class SearchPage extends StatelessWidget {
             ),
             IconButton(
               icon: Icon(Icons.search),
-              onPressed: () {
-              },
+              onPressed: () {},
             ),
             IconButton(
               icon: Icon(Icons.settings),
@@ -228,8 +263,7 @@ class SettingsPage extends StatelessWidget {
             ),
             IconButton(
               icon: Icon(Icons.settings),
-              onPressed: () {
-              },
+              onPressed: () {},
             ),
           ],
         ),

@@ -27,7 +27,8 @@ class SearchResultsState extends State<SearchResults> {
         children: [
           SizedBox(height:10),
           CupertinoSearchTextField(
-            onSubmitted: (value) {
+            onSubmitted: (value) async {
+              await backend.locationService.updateLocation();
               setState(() {
                 searchTerm = value;
               });
@@ -45,7 +46,6 @@ class SearchResultsState extends State<SearchResults> {
                 child: Image.asset(
                   "assets/yelp_logo.png",
                   scale: 18,
-                  
                 ),
               ),
             ]
@@ -67,19 +67,17 @@ class SearchResultsState extends State<SearchResults> {
   Map<String,String> _buildSearchParams() {
     Map<String,String> params = {
       "limit": "50",
-      "sort_by": "best_match",
+      "sort_by": "distance",
       "device_platfrom": "ios",
       "categories": "food",
       "open_now": "false",
       "term": searchTerm,
-      "radius": "40000", // TODO
+      "radius": "40000",
     };
 
     if (backend.settingsPage.manualLocation) {
-      print("using manual ${backend.settingsPage.address}");
       params["location"] = backend.settingsPage.address;
     } else {
-      print("using auto ${backend.settingsPage.lat},${backend.settingsPage.long}");
       params["latitude"] = "${backend.settingsPage.lat}";
       params["longitude"] = "${backend.settingsPage.long}";
     }
@@ -117,7 +115,7 @@ class SearchResultsState extends State<SearchResults> {
               showDialog(
                 context: context,
                 builder: (context) {
-                  return RestaurantPage();
+                  return RestaurantPage(restaurant: restaurantService.results[index]);
                 }
               );
             }, 

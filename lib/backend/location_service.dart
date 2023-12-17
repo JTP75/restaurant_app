@@ -17,6 +17,7 @@ class LocationService {
   }
 
   Future<void> updateLocation() async {
+    print("Retrieving Geolocation Data");
     try {
       var uri = Uri.parse(serviceUrl);
       var response = await http.get(
@@ -34,7 +35,7 @@ class LocationService {
         throw Exception("Response is null (turn off VPN)");
       }
     } catch (exception) {
-      print("\x1b[1;31mException caught in LocationService.updateLocation()\x1b[0m\n$exception");
+      print("\n\x1b[1;31mException caught in LocationService.updateLocation()\x1b[0m\n$exception");
       responseBody = {};
     }
   }

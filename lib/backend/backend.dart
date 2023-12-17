@@ -1,10 +1,13 @@
+import 'dart:math';
+
 import 'package:restaurant_app/backend/restaurant_service.dart';
 import 'package:restaurant_app/backend/location_service.dart';
 
 RestaurantService restaurantService = RestaurantService().loadAccessToken();
 LocationService locationService = LocationService().loadAccessToken();
+final random = Random();
 
-const List<String> priceRangeEntries = ["Any","\$","\$\$","\$\$\$"];
+const List<String> priceRangeEntries = ["Any","\$","\$\$","\$\$\$","\$\$\$\$"];
 const List<String> foodTypeEntries = [
   "Any",
   "Breakfast",
@@ -24,40 +27,42 @@ const List<String> foodTypeEntries = [
   "Sushi Bars",
   "American"
 ];
-const List<int> travelDistanceEntries = [1,5,10,25,-1];
+const List<int> travelDistanceEntries = [1,5,10,25];
 
 class HomePageBackend {
   String priceRange = "Any";
   String foodType = "Any";
-  DietaryRestrictions dietaryRestrictions = DietaryRestrictions();
   int maxDistanceMiles = 10;
 
   HomePageBackend() {
     priceRange = "Any";
     foodType = "Any";
-    dietaryRestrictions = DietaryRestrictions();
-
-    print(dietaryRestrictions);
   }
-}
 
-class DietaryRestrictions {
-  bool glutenFree = false;
-  bool halal = false;
-  bool keto = false;
-  bool kosher = false;
-  bool pescatarian = false;
-  bool vegetarian = false;
-  bool vegan = false;
+  Map<String,String> _buildSearchParams() {
+    Map<String,String> params = {
+      "limit": "50",
+      "sort_by": "distance",
+      "device_platfrom": "ios",
+      "term": foodType,
+      "open_now": "false",
+      "radius": "${maxDistanceMiles*1609}",
+    };
 
-  DietaryRestrictions() {
-    glutenFree = false;
-    halal = false;
-    keto = false;
-    kosher = false;
-    pescatarian = false;
-    vegetarian = false;
-    vegan = false;
+    if (settingsPage.manualLocation) {
+      params["location"] = settingsPage.address;
+    } else {
+      params["latitude"] = "${settingsPage.lat}";
+      params["longitude"] = "${settingsPage.long}";
+    }
+
+    return params;
+  }
+
+  Future<Restaurant> chooseRestaurant() async {
+    var params = _buildSearchParams();
+    await restaurantService.search(params);
+    return restaurantService.results[random.nextInt(restaurantService.results.length)];
   }
 }
 
@@ -88,16 +93,13 @@ class SettingsPageBackend {
 
   SettingsPageBackend() {
     _locationService = locationService;
-    _manualLocation = false;
     _address = "";
-    lat = 0.0;
-    long = 0.0;
+    manualLocation = false;
   }
 
   set manualLocation(bool mode) {
     _manualLocation = mode;
     if (!_manualLocation) {
-      _locationService.updateLocation();
       lat = _locationService.latitude;
       long = _locationService.longitude;
     }
