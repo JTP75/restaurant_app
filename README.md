@@ -1,16 +1,23 @@
 # restaurant_app
 
-A new Flutter project.
+This is the Flutter base directory for my restaurant app TastyTable. All of the code I wrote is contained in the lib folder. The lib folder contains the following items and subdirectories.
+- `/lib/backend` contains all backend implementations for the application. Note that the backend implementation is client-side
+- `/lib/page_assets` contains flutter-based frontend code that implements all the subcomponents of the user interface.
+- `/lib/main.dart` is the main program for the application. it also contains the top-level frontend classes based on the Flutter framework.
 
 ## Getting Started
+To install the app on windows, first install the Flutter SDK using the link and following the instructions. You will also need to add the SDK to to your `$env:path` environmental variable.
 
-This project is a starting point for a Flutter application.
+- https://docs.flutter.dev/get-started/install/windows
 
-A few resources to get you started if this is your first Flutter project:
+Then, clone the repository using the following command:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```git clone https://github.com/JTP75/restaurant_app.git```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+To install the dependencies, navigate the the `restaurant_app/` directory and run:
+
+```flutter pub get```
+
+The app may now be run from the `restaurant_app/` directory using:
+
+```flutter run -d windows```
