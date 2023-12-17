@@ -137,7 +137,7 @@ class ManualLocationSettingState extends State<ManualLocationSetting> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Version 0.5.0-alpha",
+                  "Version v1.0.0-beta",
                   style: TextStyle(
                     fontSize: 12.0,
                     color: Color.fromARGB(255, 128, 128, 128),
