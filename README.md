@@ -1,6 +1,6 @@
 # restaurant_app
 
-This is the Flutter base directory for my restaurant app TastyTable. All of the code I wrote is contained in the lib folder. The lib folder contains the following items and subdirectories.
+This is the Flutter base directory for my mobile app TastyTable. All of the code I wrote is contained in the lib folder. The lib folder contains the following items and subdirectories.
 - `/lib/backend` contains all backend implementations for the application. Note that the backend implementation is client-side
 - `/lib/page_assets` contains flutter-based frontend code that implements all the subcomponents of the user interface.
 - `/lib/main.dart` is the main program for the application. it also contains the top-level frontend classes based on the Flutter framework.
